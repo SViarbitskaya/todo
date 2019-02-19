@@ -3,59 +3,50 @@ import List from './List';
 import TaskForm from './TaskForm';
 import './ToDo.css';
 
-class ToDo extends React.Component {
+class ToDo extends Component {
   constructor(props) {
     super(props);
-    this.handleTaskChange = this.handleTaskChange.bind(this);
+    //this.handleTaskChange = this.handleTaskChange.bind(this);
+    this.handleTaskAdd = this.handleTaskAdd.bind(this);
     this.state = {
-      value: "test",
-      letters: ["A","B","C"],
-      task: ''
+      newTask: '',
+      list: [],
     };
   }
 
-  handleTaskChange(newTask) {
-    this.setState({task: newTask});
+  /*handleTaskChange(newTask) {
+    this.setState({newTask: newTask});
+    const list = this.state.list;
+    const updatedList = [...list, newTask];
+    this.setState({list: updatedList});
+  }*/
+
+  handleTaskAdd(value) {
+
+    this.setState({newTask: value});
+    //const list = this.state.list;
+    const updatedList = [...this.state.list, value];
+    this.setState({list: updatedList});
   }
 
   render() {
-    const newTask = this.state.task;
+    //const newTask = this.state.newTask;
+    //const updatedList = this.state.list;
     return (
-      <div class="ToDo">
+      <div className="ToDo">
         <h1>To Do List</h1>
         <div>
-          <TaskForm />
+          <TaskForm 
+            //newTask={this.state.newTask}
+            //onTaskChange={this.handleTaskChange}
+            onTaskAdd={this.handleTaskAdd}/>
         </div>
         <div>
-          <List value={this.state.letters} />
+          <List list={this.state.list} />
         </div>
       </div>
     );
   }
 }
 
-/*class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}*/
-
-//export default App;
 export default ToDo;

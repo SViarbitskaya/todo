@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 
-class TaskForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {newTask: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    //this.setState({newTask: event.target.value});
-    this.props.onTaskChange(event.target.value);
-  }
-
-  handleSubmit(event) {
-    alert('A new task was added: ' + this.state.newTask);
+class TaskForm extends Component {
+  handleAdd = (event) => {
     event.preventDefault();
+    this.props.onTaskAdd(this.task.value);
+    
   }
 
   render() {
+    //const newTask = this.props.newTask;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleAdd}>
         <label>
           New Task:
-          <input type="text" value={this.props.newTask} onChange={this.handleChange} />
+          <input type="text" 
+            //value={this.state.value}
+            ref={(element) => {this.task = element}}
+          />
         </label>
-        <input type="submit" value="Add" />
+        <input type="submit" 
+          value="Add"
+          />
       </form>
     );
   }

@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 
-class List extends React.Component {
+class List extends Component {
   render() {
-    const letters = this.props.value;
-    const listItems = letters.map((letter) => {
+    //const letters = this.props.value;
+    const tasks = this.props.list;
+    const listItems = tasks.map((task, index) => {
         return (
-            <li key={letter}>
-                {letter}
+            <li key={index}>
+                {task}
             </li>
         );
       });
     return (
         <ul>{listItems}</ul>
-        //<p>{letters}</p>
+        //<p>{tasks}</p>
     );
   }
 }
